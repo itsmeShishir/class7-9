@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block content %}
+    {% for a in blogs %}
+        <a href="{{a.id}}">
+            <img src={{a.img.url}} alt={{a.title}} >
+            <h1>{{a.id}}</h1>
+            <h1>{{a.title}}</h1>
+            <h3>{{a.description}}</h3>
+            <h4>Autor : {{a.username}} </h4>
+        </a>
+    {% endfor%}
+{% endblock  %}
+
+   

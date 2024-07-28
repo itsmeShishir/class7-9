@@ -1,0 +1,17 @@
+{% include "header.html" %}
+
+    <h1>THis is my homepage</h1>
+    <img src="/static/img/img1.jpg" alt=" img here" width="300" height="300">
+    
+    {% for a in lists %}
+        <li>{{a}}</li>
+    {% endfor %}
+    
+    <h2>{{name}}</h2>
+    
+     {% for a in list2 %}
+        <li>{{a}}</li>
+    {% endfor %}
+
+{% include "footer.html" %}
+  
