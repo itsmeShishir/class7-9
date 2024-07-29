@@ -21,5 +21,7 @@ def blogItem(request, pk):
     }
     return render(request, "singleblog.html", context)
 
-
+#form, category ->id -> blogs, ui, 
+# Slider -> , cbv, 
+#contact us form, slider model , frontend implementation
 

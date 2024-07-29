@@ -1,13 +1,17 @@
 from django.http import HttpResponse
 from django.shortcuts import render
-
+from category.models import Slider, Category
+from blog.models import Blog
 def Home(request):
-    data = {
-        "name": "Shishir",
-        'lists': [1,2,3,4,5],
-        'list2':["a", "b", "c", 'd']
+    slider = Slider.objects.all()
+    category = Category.objects.all()
+    blog = Blog.objects.all()
+    context = {
+       'slider': slider,
+       'category' :category,
+       'blog' : blog
     }
-    return render(request, "home.html", data)
+    return render(request, "home.html", context)
 
 def Contact(request):
     return render(request, "index.html")
