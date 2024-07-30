@@ -1,13 +1,17 @@
 {% include "header.html" %}
-    {% for a in slider%}
+   
         <div id="carouselExampleIndicators" class="carousel slide">
   <div class="carousel-indicators">
+    {% for a in slider%}
     <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+    {% endfor %}
   </div>
   <div class="carousel-inner">
+    {% for a in slider%}
     <div class="carousel-item active">
-      <img src={{ a.img.url }} class="d-block w-100" alt="...">
+      <img src={{ a.img.url }} class="d-block w-100 h-80" alt="..." style="height: 700px">
     </div>
+    {% endfor %}
   </div>
   <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -18,20 +22,48 @@
     <span class="visually-hidden">Next</span>
   </button>
 </div>
-    {% endfor %}
     
-    {% for a in blog %}
-        <div class="card-group">
-            <div class="card" style="width: 18rem;">
-            <img src={{ a.img.url }} class="card-img-top img" alt={{a.title}}>
+    
+
+  <div class="album py-5 bg-body-tertiary">
+    <div class="container">
+      {% for a in blog %}
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+        <div class="col">
+          <div class="card shadow-sm">
+            <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"></rect><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
+            <div class="card-body">
+              <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+                  <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                  <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                </div>
+                <small class="text-body-secondary">9 mins</small>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+      </div>
+              {% endfor %}
+    </div>
+  </div>
+
+    
+        {% comment %} <div class=" d-flex">
+            <div class="card" style="width: 300px;">
+            <img src= class="card-img-top img" alt={{a.title}} style="width:350px; height: 300px">
             <div class="card-body">
                 <h5 class="card-title">{{a.title}}</h5>
                 <p class="card-text">{{a.description}}</p>
                 <a href="#" class="btn btn-primary">Go somewhere</a>
             </div>
             </div>
-        </div>
-    {% endfor %}
+        </div> {% endcomment %}
+    
+    
     
     <h2>{{name}}</h2>
     
