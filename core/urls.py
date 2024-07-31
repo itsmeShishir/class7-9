@@ -7,6 +7,7 @@ from django.contrib import admin
 urlpatterns = [
     path('admin/', admin.site.urls),
     path("", views.Home, name = "home"),
+    path("contactus/", views.Contact, name = "contactus"),
     path("", include('blog.urls')),
     path("", include('category.urls'))
 ]

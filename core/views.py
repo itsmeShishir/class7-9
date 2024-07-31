@@ -1,3 +1,4 @@
+from django.views.generic import ListView
 from django.http import HttpResponse
 from django.shortcuts import render
 from category.models import Slider, Category
@@ -22,3 +23,7 @@ def AboutUs(request):
 def Blogs(request, blogid):
     return render(request, "index.html")
 
+class blog_views(ListView):
+    model = Blog
+    template_name = "home.html"
+    context_object_name = 'blogs'

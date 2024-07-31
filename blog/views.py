@@ -14,6 +14,7 @@ def Blogs(request):
 
     return render(request, "blog.html", context)
 
+
 def blogItem(request, pk):
     blogs = get_object_or_404(Blog, pk = pk)
     context = {
