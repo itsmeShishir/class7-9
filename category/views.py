@@ -1,5 +1,7 @@
 from django.shortcuts import render, redirect
-from .models import Contact
+
+from core.blog.models import Blog
+from .models import Category, Contact
 from .forms import ContactForm, ContactForms, UserRegistration
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import AuthenticationForm
@@ -24,10 +26,6 @@ def register_view(request):
         form = UserRegistration(request.POST)
         if form.is_valid():
             form.save()
-            username = form.cleaned_data.get('username')
-            password = form.cleaned_data.get('password')
-            user = AuthenticationForm(username = username,password = password )
-            login(request, user)
             return redirect('home')
     else:
         form = UserRegistration()
@@ -56,4 +54,11 @@ def contact_forms(request):
 def successful(request):
     return render(request, "successfull.html")
 
+def category_view(request):
+    category = Category.objects.all()
+    return render(request, "category.html", {'category':category})
 
+def category_view(request, pk):
+    category = Category.objects.filter(pk = id)
+    blogs = Blog.objects.all()
+    return render(request, "category.html", {'category':category})

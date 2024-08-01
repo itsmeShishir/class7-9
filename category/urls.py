@@ -9,6 +9,8 @@ urlpatterns = [
          name="contact"),
      path("register/", views.register_view, 
          name="register"),
+     path("category/", views.category_view, 
+         name="category"),
 ]
 
 
