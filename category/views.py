@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 
-from core.blog.models import Blog
+from blog.models import Blog
 from .models import Category, Contact
 from .forms import ContactForm, ContactForms, UserRegistration
 from django.contrib.auth import authenticate, login, logout
@@ -31,6 +31,21 @@ def register_view(request):
         form = UserRegistration()
     return render(request, 'register.html', {'form': form})
 
+
+def login_view(request):
+    if request.method == 'POST':
+        form = AuthenticationForm(request.POST)
+        if form.is_valid():
+            username = form.changed_data.get('username')
+            password = form.changed_data.get('password')
+            user = authenticate(username = username, password = password)
+            if user is not None:
+                login(request, user)
+            return redirect('home')
+    else:
+        form = AuthenticationForm()
+    return render(request, 'login.html', {'form': form})
+
 def successful(request):
     return render(request, "successfull.html")
 
@@ -59,6 +74,6 @@ def category_view(request):
     return render(request, "category.html", {'category':category})
 
 def category_view(request, pk):
-    category = Category.objects.filter(pk = id)
+    category = Category.objects.filter(pk = pk)
     blogs = Blog.objects.all()
     return render(request, "category.html", {'category':category})
