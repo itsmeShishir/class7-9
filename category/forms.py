@@ -5,8 +5,9 @@ from django.contrib.auth.forms import UserCreationForm
 
 class UserRegistration(UserCreationForm):
     email = forms.EmailField()
+
     class Meta:
-        models = User
+        model = User
         fields = ['username', 'email', 'password1', 'password2']
 
 class ContactForm(forms.ModelForm):

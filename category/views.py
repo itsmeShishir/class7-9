@@ -5,7 +5,6 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import AuthenticationForm
 
 # Create your views here.
-
 def contact_view(request):
     if request.method == "POST":
         form = ContactForm(request.POST)
@@ -21,21 +20,21 @@ def successful(request):
 
 
 def register_view(request):
-    if request.method == "POST":
+    if request.method == 'POST':
         form = UserRegistration(request.POST)
         if form.is_valid():
-
-            login(request)
+            form.save()
+            username = form.cleaned_data.get('username')
+            password = form.cleaned_data.get('password')
+            user = AuthenticationForm(username = username,password = password )
+            login(request, user)
             return redirect('home')
-            
     else:
         form = UserRegistration()
-    return render(request, "register.html", 
-                  {'form':form} )
+    return render(request, 'register.html', {'form': form})
 
 def successful(request):
     return render(request, "successfull.html")
-
 
 def contact_forms(request):
     if request.method == "POST":
