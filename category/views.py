@@ -42,7 +42,6 @@ def login_view(request):
             if user is not None:
                 login(request, user)
             return redirect('home')
-            
     else:
         form = AuthenticationForm()
     return render(request, 'login.html', {'form': form})
@@ -82,3 +81,8 @@ def category_views(request, pk):
     category = Category.objects.filter(pk = pk)
     blogs = Blog.objects.all()
     return render(request, "category.html", {'category':category})
+
+
+def user_logout(request):
+    logout(request)
+    return redirect('home')
