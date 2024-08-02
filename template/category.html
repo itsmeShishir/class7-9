@@ -9,7 +9,7 @@
          {% for a in category %}
         <div class="col">
        
-        <div class="card shadow-sm">
+        <a href="{{a.id}}"><div class="card shadow-sm">
             <img class="bd-placeholder-img card-img-top" width="100%" height="225" src={{a.img.url}} />
             <div class="card-body">
               <p class="card-text">{{a.title}}</p>
@@ -20,7 +20,8 @@
        
           
 
-        </div>
+          </div>
+        </a>
          {% endfor %}
       </div>
     </div>

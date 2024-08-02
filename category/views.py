@@ -46,8 +46,6 @@ def login_view(request):
         form = AuthenticationForm()
     return render(request, 'login.html', {'form': form})
 
-def logout_view(request):
-    return redirect(request, )
 
 def successful(request):
     logout(request)
@@ -77,12 +75,24 @@ def category_view(request):
     category = Category.objects.all()
     return render(request, "category.html", {'category':category})
 
-def category_views(request, pk):
-    category = Category.objects.filter(pk = pk)
-    blogs = Blog.objects.all()
-    return render(request, "category.html", {'category':category})
+
 
 
 def user_logout(request):
     logout(request)
-    return redirect('home')
+    return redirect('hone')
+
+
+def category_views(request):
+    category = Category.objects.all()
+    return render(request, "category.html", {'category':category})
+
+
+def category_view(request, pk):
+    category = get_object_or_404(Category, pk = pk)
+    blogs = Blog.objects.filter(category = category)
+    context = {
+        'category': category,
+        'blogs': blogs
+    }
+    return render(request, "blogcategory.html", {'context':context})

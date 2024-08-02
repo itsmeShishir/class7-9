@@ -20,10 +20,10 @@
 
       <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
         <li><a href={% url "home" %} class="nav-link px-2 link-secondary">Home</a></li>
-        <li><a href="category/" class="nav-link px-2">Category</a></li>
-        <li><a href="#" class="nav-link px-2">Blog</a></li>
+        <li><a href={% url "category" %} class="nav-link px-2">Category</a></li>
+        <li><a href={% url "blogs-items" %} class="nav-link px-2">Blog</a></li>
         <li><a href="#" class="nav-link px-2">About US</a></li>
-        <li><a href="#" class="nav-link px-2">Contact Us</a></li>
+        <li><a href={% url "contact" %} class="nav-link px-2">Contact Us</a></li>
       </ul>
 
       <div class="col-md-3 text-end">
