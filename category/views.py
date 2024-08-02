@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 
 from blog.models import Blog
 from .models import Category, Contact
@@ -34,20 +34,25 @@ def register_view(request):
 
 def login_view(request):
     if request.method == 'POST':
-        form = AuthenticationForm(request.POST)
+        form = AuthenticationForm(request, data=request.POST)
         if form.is_valid():
-            username = form.changed_data.get('username')
-            password = form.changed_data.get('password')
-            user = authenticate(username = username, password = password)
+            username = form.cleaned_data.get('username')
+            password = form.cleaned_data.get('password')
+            user = authenticate(username=username, password=password)
             if user is not None:
                 login(request, user)
             return redirect('home')
+            
     else:
         form = AuthenticationForm()
     return render(request, 'login.html', {'form': form})
 
+def logout_view(request):
+    return redirect(request, )
+
 def successful(request):
-    return render(request, "successfull.html")
+    logout(request)
+    return redirect('home')
 
 def contact_forms(request):
     if request.method == "POST":
@@ -73,7 +78,7 @@ def category_view(request):
     category = Category.objects.all()
     return render(request, "category.html", {'category':category})
 
-def category_view(request, pk):
+def category_views(request, pk):
     category = Category.objects.filter(pk = pk)
     blogs = Blog.objects.all()
     return render(request, "category.html", {'category':category})

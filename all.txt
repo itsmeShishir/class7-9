@@ -3,7 +3,16 @@ pip freeze > requirements.txt
 pip install -r requirements.txt
 
 deactivate
-
 username = form.cleaned_data.get('username')
 password = form.cleaned_data.get('password1')
 user = authenticate(username=username, password=password)
+
+
+def category_blogs(request, pk):
+    category = get_object_or_404(Category, id=pk)
+    blogs = Blog.objects.filter(category=category)
+    context = {
+        'category': category,
+        'blogs': blogs,
+    }
+    return render(request, 'category.html', context)
