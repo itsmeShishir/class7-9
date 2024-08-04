@@ -3,7 +3,8 @@
     
     <form method="post">
         {% csrf_token %}
-        {% from.as_p %}
+        {{form.as_p}}
+        <button type="submit">update</button>
     </form>
 
 {% endblock %}

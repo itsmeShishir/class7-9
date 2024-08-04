@@ -16,7 +16,9 @@ urlpatterns = [
         path("category/<int:pk>", views.category_view, 
         name="categoryblog"),
         path("contact/update/<int:pk>/", views.update_contact, name="update_contact"),
-        path("contact/delete/<int:pk>/", views.delete_contact, name="delete_contact")
+        path("contact/delete/<int:pk>/", views.delete_contact, name="delete_contact"),
+        path("successfull", views.successfully, name="successfull"),
+        path("allcontact/", views.contact_all, name="contact_all"),
 ]
 
 

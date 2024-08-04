@@ -95,6 +95,13 @@ def category_view(request, pk):
     }
     return render(request, "blogcategory.html", {'context':context})
 
+def successfully(request):
+    return render(request, "successfull.html")
+
+def contact_all(request):
+    contact = Contact.objects.all()
+    return render(request, "allcontact.html", {"contact": contact})
+
 @require_http_methods(["GET", "POST"])
 def update_contact(request, pk):
     contact = get_object_or_404(Contact, pk = pk)
