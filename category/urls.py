@@ -15,6 +15,8 @@ urlpatterns = [
         path('/logout', views.user_logout, name="logout"), 
         path("category/<int:pk>", views.category_view, 
         name="categoryblog"),
+        path("contact/update/<int:pk>/", views.update_contact, name="update_contact"),
+        path("contact/delete/<int:pk>/", views.delete_contact, name="delete_contact")
 ]
 
 

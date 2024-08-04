@@ -5,6 +5,7 @@ from .models import Category, Contact
 from .forms import ContactForm, ContactForms, UserRegistration
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import AuthenticationForm
+from django.views.decorators.http import require_http_methods
 
 # Create your views here.
 def contact_view(request):
@@ -75,9 +76,6 @@ def category_view(request):
     category = Category.objects.all()
     return render(request, "category.html", {'category':category})
 
-
-
-
 def user_logout(request):
     logout(request)
     return redirect('hone')
@@ -96,3 +94,27 @@ def category_view(request, pk):
         'blogs': blogs
     }
     return render(request, "blogcategory.html", {'context':context})
+
+@require_http_methods(["GET", "POST"])
+def update_contact(request, pk):
+    contact = get_object_or_404(Contact, pk = pk)
+    if request.method == "POST":
+        form = ContactForm(request.POST, instance=contact)
+        if form.is_valid():
+            form.save()
+            return redirect('successfull')
+    else:
+        form  = ContactForm(instance=contact)
+    
+    return render(request, 'update_contact.html', {'form': form, 'contact':contact})
+
+
+@require_http_methods(["GET", "POST"])
+def delete_contact(request, pk):
+    contact = get_object_or_404(Contact, pk = pk)
+    if request.method== "POST":
+        contact.delete()
+        return redirect('successfull')
+    
+    return render(request, 'delete_contact.html')
+
