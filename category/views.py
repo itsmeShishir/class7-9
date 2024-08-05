@@ -6,6 +6,7 @@ from .forms import ContactForm, ContactForms, UserRegistration
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import AuthenticationForm
 from django.views.decorators.http import require_http_methods
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 def contact_view(request):
@@ -45,12 +46,14 @@ def login_view(request):
             return redirect('home')
     else:
         form = AuthenticationForm()
-    return render(request, 'login.html', {'form': form})
+    return render(request, 'registration/login.html', {'form': form})
 
 
 def successful(request):
     logout(request)
     return redirect('home')
+
+
 
 def contact_forms(request):
     if request.method == "POST":
@@ -78,7 +81,7 @@ def category_view(request):
 
 def user_logout(request):
     logout(request)
-    return redirect('hone')
+    return redirect('home')
 
 
 def category_views(request):
@@ -102,6 +105,7 @@ def contact_all(request):
     contact = Contact.objects.all()
     return render(request, "allcontact.html", {"contact": contact})
 
+@login_required
 @require_http_methods(["GET", "POST"])
 def update_contact(request, pk):
     contact = get_object_or_404(Contact, pk = pk)
@@ -115,7 +119,7 @@ def update_contact(request, pk):
     
     return render(request, 'update_contact.html', {'form': form, 'contact':contact})
 
-
+@login_required
 @require_http_methods(["GET", "POST"])
 def delete_contact(request, pk):
     contact = get_object_or_404(Contact, pk = pk)

@@ -20,9 +20,9 @@
       <td>{{a.email}}</td>
       <td>{{a.number}}</td>
       <td>
-
         <a href={% url "update_contact" pk=a.id %} class="btn btn-primary">Update</a>
         <form method="POST" action={% url "delete_contact" pk=a.id %}>
+            
              <button type="submit" class="btn btn-danger">Delete</button>
         </form>
       </td>
