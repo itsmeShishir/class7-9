@@ -38,6 +38,7 @@ function App() {
         <Route path="*" element={<ErrorPage />} />
         </Route>
           <Route path="/admin/*" element={<PrivateRoute allowedRoles={['admin']} />}>
+          <Route element={<Dashboard />} />
           <Route index element={<Dashboard />} />
           <Route path="allCategory" element={<CategoryAdmin />}/>
           <Route path="addCategory" element={<AddCategory />}/>
