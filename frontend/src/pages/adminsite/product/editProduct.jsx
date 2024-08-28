@@ -59,7 +59,7 @@ const EditProduct = () => {
     formData.append("is_featured", data.is_featured);
 
     try {
-      await axios.put(`http://127.0.0.1:8000/singleProduct/${id}`, formData, {
+      await axios.put(`http://127.0.0.1:8000/updateDelete/${id}/`, formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },

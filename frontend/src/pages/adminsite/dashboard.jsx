@@ -6,7 +6,7 @@ const Dashboard = () => {
     <div>
       <div>
           <div>
-              <SideBar />
+            <SideBar />
           </div>        
           <div className="bg-white fixed left-[250px] py-6 px-4 font-[sans-serif]">
           <Outlet />

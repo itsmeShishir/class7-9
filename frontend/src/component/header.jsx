@@ -40,8 +40,8 @@ export function Header() {
             <span className="block truncate text-sm font-medium">{email}</span>
           </Dropdown.Header>
           {role=='admin' ? (<Dropdown.Item><Link to="/admin">Dashboard</Link></Dropdown.Item>): ""}
-          <Dropdown.Item>Settings</Dropdown.Item>
-          <Dropdown.Item>Earnings</Dropdown.Item>
+          <Dropdown.Item>Change Password</Dropdown.Item>
+          <Dropdown.Item><Link to="/cart">Cart</Link></Dropdown.Item>
           <Dropdown.Divider />
           <Dropdown.Item onClick={signout}>Sign out</Dropdown.Item>
         </Dropdown>
@@ -54,7 +54,9 @@ export function Header() {
           <Link to="/register" className="px-4 py-2 bg-red-500 rounded-xl">Register</Link>
         </div></>
         )}
+        
       </div>
+
      
       <Navbar.Collapse>
         <Link to="/" active>
