@@ -21,9 +21,11 @@ import { ToastContainer } from 'react-toastify';
 import PrivateRoute from "./pages/PrivateRoute"
 import AddProducts from "./pages/adminsite/product/addProductall"
 import EditProduct from "./pages/adminsite/product/editProduct"
-import MobileCart from "./pages/userside/Cart"
-function App() {
+import MobileCart from "./pages/userside/Cart";
+import AllUsers from "./pages/adminsite/users/AllUsers"
 
+function App() {
+  
   return (
     <>
       <Routes>
@@ -42,6 +44,7 @@ function App() {
         </Route>
           <Route path="/admin/*" element={<PrivateRoute allowedRoles={['admin']} />}>
           <Route index element={<Dashboard />} />
+          <Route path="allUsers" element={<AllUsers />}/>
           <Route path="allCategory" element={<CategoryAdmin />}/>
           <Route path="addCategory" element={<AddCategory />}/>
           <Route path="allProduct" element={<ProductAdmin />}/>

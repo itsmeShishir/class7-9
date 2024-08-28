@@ -146,3 +146,14 @@ class CreateOrderView(APIView):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         except Cart.DoesNotExist:
             return Response({"error": "No active cart found"}, status=status.HTTP_400_BAD_REQUEST)
+
+#All USer
+class UserView(generics.ListAPIView):
+    queryset = User.objects.all()
+    serializer_class = AllUserSerializer
+
+class UserUpdateDeleteView(generics.RetrieveUpdateDestroyAPIView):
+    queryset = User.objects.all()
+    serializer_class = AllUserSerializer
+
+

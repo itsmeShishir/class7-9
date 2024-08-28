@@ -20,6 +20,11 @@ class RegisterSerializations(serializers.ModelSerializer):
 # products = ProductSerializer(many=True, read_only=True
 # lookup_field = 'id'
 
+class AllUserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = "__all__"
+
 class ProductSerializer(serializers.ModelSerializer):
     class Meta:
         model = Product
