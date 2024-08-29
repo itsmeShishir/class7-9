@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const EditContact = () => {
   const { id } = useParams();
@@ -44,12 +45,13 @@ const EditContact = () => {
       });
 
       if (res.ok) {
+        toast("contact Updated Successfully")
         navigate("/admin");
       } else {
-        console.log("Update failed");
+        toast("Update failed");
       }
     } catch (e) {
-      console.log("Update contact failed", e.message);
+      toast("Update contact failed", e.message);
     }
   };
 

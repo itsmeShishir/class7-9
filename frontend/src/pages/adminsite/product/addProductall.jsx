@@ -1,6 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const AddProducts = () => {
   const [data, setData] = useState({
@@ -52,10 +53,10 @@ const AddProducts = () => {
           "Content-Type": "multipart/form-data",
         },
       });
-      console.log("Product Added successfully");
+      toast("Product Added successfully");
       navigate("/products"); 
     } catch (err) {
-      console.log("Product Add failed", err.message);
+      toast("Product Add failed", err.message);
     }
   };
 

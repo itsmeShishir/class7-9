@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-
+import { toast } from "react-toastify";
 const AllUsers = () => {
   const [data, setData] = useState([]);
 
@@ -23,9 +23,9 @@ const AllUsers = () => {
         method: "DELETE",
       });
       setData(data.filter((item) => item.id !== id));
-      console.log("User deleted successfully");
+      toast("User deleted successfully");
     } catch (e) {
-      console.log("Delete User failed", e.message);
+      toast("Delete User failed", e.message);
     }
   };
 

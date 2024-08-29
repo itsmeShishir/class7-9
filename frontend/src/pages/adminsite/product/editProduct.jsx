@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { useParams, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const EditProduct = () => {
   const [data, setData] = useState({
@@ -23,7 +24,7 @@ const EditProduct = () => {
         const response = await axios.get(`http://127.0.0.1:8000/singleProduct/${id}`);
         setData(response.data);
       } catch (err) {
-        console.log("Error fetching product data", err.message);
+       toast("Error fetching product data", err.message);
       }
     };
 
@@ -64,10 +65,10 @@ const EditProduct = () => {
           "Content-Type": "multipart/form-data",
         },
       });
-      console.log("Product updated successfully");
+      toast("Product updated successfully");
       navigate("/products"); 
     } catch (err) {
-      console.log("Product update failed", err.message);
+      toast("Product update failed", err.message);
     }
   };
 

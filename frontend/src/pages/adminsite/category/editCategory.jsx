@@ -1,61 +1,77 @@
-import { useState } from "react";
-import axios from "axios";
+import { useState, useEffect } from "react";
+import { useParams, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
-const AddCategory = () => {
-  const [data, setData] = useState({
+const EditCategory = () => {
+  const { id } = useParams();
+  const navigate = useNavigate();
+  const [formData, setFormData] = useState({
     title: "",
     username: "",
     img: null, 
     description: ""
   });
 
-  function handleChange(event) {
+  useEffect(() => {
+    const fetchCategory = async () => {
+      try {
+        let res = await fetch(`http://127.0.0.1:8000/category/${id}/`);
+        let category = await res.json();
+        setFormData(category);
+      } catch (e) {
+        console.log(e.message);
+      }
+    };
+    fetchCategory();
+  }, [id]);
+
+  const handleInputChange = (event) => {
     const { name, value } = event.target;
     if (name === "img") {
-      setData((items) => ({
+      setFormData((items) => ({
         ...items,
         img: event.target.files[0],  
       }));
     } else {
-      setData((items) => ({
+      setFormData((items) => ({
         ...items,
         [name]: value,
       }));
     }
   }
 
-  const onSubmit = async (e) => {
-    e.preventDefault();
-    const formData = new FormData();
-    formData.append("title", data.title);
-    formData.append("description", data.description);
-    formData.append("img", data.img);
-    formData.append("username", data.username);
-
+  const updatecategory = async () => {
     try {
-      await axios.post("http://127.0.0.1:8000/addCategory/", formData, {
+      const res = await fetch(`http://127.0.0.1:8000/category/${id}/`, {
+        method: "PATCH",
         headers: {
-          "Content-Type": "multipart/form-data",  
+          "Content-Type": "application/json",
         },
+        body: JSON.stringify(formData),
       });
-      toast("Category added successfully");
-    } catch (err) {
-      toast("Category creation failed", err);
+
+      if (res.ok) {
+        toast("Category Updated Successfully")
+        navigate("/admin");
+      } else {
+        toast("Update failed");
+      }
+    } catch (e) {
+      toast("Update category failed", e.message);
     }
   };
 
   return (
-    <>
-      <form onSubmit={onSubmit}>
+    <div className="max-w-lg mx-auto my-10">
+      <form onSubmit={updatecategory}>
         <div className="flex flex-col justify-center max-w-lg mx-auto px-4 space-y-6 font-[sans-serif] text-[#333]">
           <div>
             <label className="mb-2 text-lg block">Title</label>
             <input
               type="text"
               name="title"
-              value={data.title}
-              onChange={handleChange}
+              value={formData.title}
+              onChange={handleInputChange}
               placeholder="Large Input"
               className="px-4 py-2.5 text-lg rounded-md bg-white border border-gray-400 w-full outline-blue-500"
             />
@@ -65,8 +81,8 @@ const AddCategory = () => {
             <input
               type="text"
               name="description"
-              value={data.description}
-              onChange={handleChange}
+              value={formData.description}
+              onChange={handleInputChange}
               placeholder="Large Input"
               className="px-4 py-2.5 text-lg rounded-md bg-white border border-gray-400 w-full outline-blue-500"
             />
@@ -76,7 +92,7 @@ const AddCategory = () => {
             <input
               type="file"
               name="img"
-              onChange={handleChange}
+              onChange={handleInputChange}
               className="w-full text-gray-400 font-semibold text-sm bg-white border file:cursor-pointer cursor-pointer file:border-0 file:py-3 file:px-4 file:mr-4 file:bg-gray-100 file:hover:bg-gray-200 file:text-gray-500 rounded"
             />
             <p className="text-xs text-gray-400 mt-2">
@@ -88,8 +104,8 @@ const AddCategory = () => {
             <input
               type="text"
               name="username"
-              value={data.username}
-              onChange={handleChange}
+              value={formData.username}
+              onChange={handleInputChange}
               placeholder="Large Input"
               className="px-4 py-2.5 text-lg rounded-md bg-white border border-gray-400 w-full outline-blue-500"
             />
@@ -102,8 +118,8 @@ const AddCategory = () => {
           </button>
         </div>
       </form>
-    </>
+      </div>
   );
 };
 
-export default AddCategory;
+export default EditCategory;

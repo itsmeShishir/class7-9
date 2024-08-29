@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const ContactAdmin = () => {
   const [data, setData] = useState([]);
@@ -11,7 +12,7 @@ const ContactAdmin = () => {
         let datas = await res.json();
         setData(datas);
       } catch (e) {
-        console.log(e.message);
+       toast(e.message);
       }
     };
     fetchdata();
@@ -23,9 +24,9 @@ const ContactAdmin = () => {
         method: "DELETE",
       });
       setData(data.filter((item) => item.id !== id));
-      console.log("Contact deleted successfully");
+      toast("Contact deleted successfully");
     } catch (e) {
-      console.log("Delete contact failed", e.message);
+      toast("Delete contact failed", e.message);
     }
   };
 

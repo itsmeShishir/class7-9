@@ -1,5 +1,7 @@
 import { useMemo } from "react";
 import { useSelector } from "react-redux";
+// import { Link } from "react-router-dom";
+import KhaltiCheckout from "khalti-web";
 
 const MobileCart = () => {
  const post = useSelector(state => state.cart);
@@ -17,6 +19,38 @@ const MobileCart = () => {
           </div>
         ))
   },[post])
+
+  
+  let config = {
+  "publicKey": "test_public_key_dc74e0fd57cb46cd93832aee0a507256",
+  "productIdentity": "1234567890",
+  "productName": "Drogon",
+  "productUrl": "http://gameofthrones.com/buy/Dragons",
+  "eventHandler": {
+    onSuccess (payload) {
+      console.log(payload);
+    },
+    // onError handler is optional
+    onError (error) {
+      // handle errors
+      console.log(error);
+    }
+  },
+  // one can set the order of payment options and also the payment options based on the order and items in the array
+  paymentPreference: [
+    "MOBILE_BANKING",
+    "KHALTI",
+    "EBANKING",
+    "CONNECT_IPS",
+    "SCT",
+  ],
+};
+
+let checkout = new KhaltiCheckout(config);
+// let btn = document.getElementById("payment-button");
+// btn.onclick = function () {
+// 	checkout.show({amount: 1000});
+// }
   
   return (
     <div className="container mx-auto p-4 ">
@@ -24,6 +58,7 @@ const MobileCart = () => {
       <div className="flex flex-col gap-5">
         {Info}
       </div>
+      <button onClick={()=> checkout.show({amount:100000})} className="py-3 px-6 bg-purple-600 hover:bg-purple-900 rounded-xl text-white" > Pay With Khalti</button>
     </div>
   );
 };

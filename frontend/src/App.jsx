@@ -23,6 +23,7 @@ import AddProducts from "./pages/adminsite/product/addProductall"
 import EditProduct from "./pages/adminsite/product/editProduct"
 import MobileCart from "./pages/userside/Cart";
 import AllUsers from "./pages/adminsite/users/AllUsers"
+import EditCategory from "./pages/adminsite/category/editCategory"
 
 function App() {
   
@@ -43,14 +44,17 @@ function App() {
         <Route path="*" element={<ErrorPage />} />
         </Route>
           <Route path="/admin/*" element={<PrivateRoute allowedRoles={['admin']} />}>
-          <Route index element={<Dashboard />} />
-          <Route path="allUsers" element={<AllUsers />}/>
-          <Route path="allCategory" element={<CategoryAdmin />}/>
-          <Route path="addCategory" element={<AddCategory />}/>
-          <Route path="allProduct" element={<ProductAdmin />}/>
-          <Route path="addProduct" element={<AddProducts />}/>
-          <Route path="allContact" element={<ContactAdmin />} />
-          <Route path="editContact/:id" element={<EditContact />}></Route>
+          <Route path="" element={< Dashboard />} >
+            <Route index element={<MainBody />} />
+            <Route path="allUsers" element={<AllUsers />}/>
+            <Route path="allCategory" element={<CategoryAdmin />}/>
+            <Route path="addCategory" element={<AddCategory />}/>]
+            <Route path="editCategory/:id" element={<EditCategory />}/>
+            <Route path="allProduct" element={<ProductAdmin />}/>
+            <Route path="addProduct" element={<AddProducts />}/>
+            <Route path="allContact" element={<ContactAdmin />} />
+            <Route path="editContact/:id" element={<EditContact />}/>
+          </Route>
         </Route>
         <Route path="/user/*" element={<PrivateRoute allowedRoles={['user']} />}>
           <Route index element={"User Profile"} />

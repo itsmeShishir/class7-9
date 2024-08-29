@@ -63,7 +63,7 @@ const CategoryAdmin = () => {
                   <img src= {item.img} alt="" width={100} height={100}/>
                 </td>
                 <td className="px-4 py-4 text-sm text-gray-800">
-                  <Link to={`editContact/${item.id}`} className="text-blue-600 mr-4">Edit</Link>
+                  <Link to={`/admin/editCategory/${item.id}`} className="text-blue-600 mr-4">Edit</Link>
                   <button
                     className="text-red-600"
                     onClick={() => deleteContact(item.id)}
